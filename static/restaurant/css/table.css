@@ -1,0 +1,100 @@
+.btn-order{
+    background: rgba(77, 94, 77, 0.727);
+    border: rgba(47, 58, 47, 0.727);
+    padding: 7px 9px;
+    border-radius: 4px;
+    transition: 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.btn-order:hover{
+    background: rgba(246, 246, 246, 0.758);
+    color: rgba(77, 94, 77, 0.923);
+}
+
+
+.btn-reservation{
+    background: rgba(218, 163, 172, 0.758);
+    border: rgba(47, 58, 47, 0.727);
+    padding: 7px 9px;
+    border-radius: 4px;
+    transition: 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.btn-reservation:hover{
+    background: rgba(246, 246, 246, 0.758);
+    color: rgb(145, 105, 112);
+ 
+}
+
+.card-header{
+    background-color: rgba(218, 163, 172, 0.758);
+} 
+
+
+.btn-delete{
+    background: rgba(0, 0, 0, 0.727);
+    border: rgba(47, 58, 47, 0.727);
+    padding: 7px 9px;
+    border-radius: 4px;
+    transition: 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+
+.btn-delete:hover{
+    background: #ffffff;
+    color: black;
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn-cancel{
+    background: rgba(255, 255, 255, 0.727);
+    border: rgba(0, 0, 0, 0.727);
+    padding: 7px 9px;
+    border-radius: 4px;
+    transition: 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    color: #080808;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.btn-cancel:hover{
+    background: #000000;
+    color: rgb(255, 255, 255);
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.menuitem-image{
+    max-width: 100%; 
+    height: auto; 
+    max-height: 250px; 
+    object-fit: cover;
+}
+
+

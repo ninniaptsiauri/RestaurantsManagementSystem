@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %} Profile {% endblock %}
+
+{% load crispy_forms_tags %}
+{% load static%}
+
+{% block content %}
+
+<div class="container mt-5">
+    <link rel="stylesheet" href="{% static 'user/css/profile.css' %}">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png" class="card-img-top" alt="User profile image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ user.username }} </h5>
+                    <p class="card-text">First Name: {{ user.first_name }}</p>
+                    <p class="card-text">Last Name: {{ user.last_name }}</p>
+                    <p class="card-text">Email: {{ user.email }}</p>
+                    <p class="card-text">Phone: {{ user.phone_number }}</p>
+                    <p class="card-text">Address: {{ customer.address }}</p>
+                    <a href="{% url 'user:customer_edit_profile' user.customer.id %}" class="btn btn-secondary">Edit Profile</a>
+                    <a href="{% url 'user:change_password'%}" class="btn btn-secondary">Change Password</a>
+                    <a href="{% url 'user:delete_account' user.id  %}" class="btn btn-primary" style="margin-top: 5px;" >Delete Account</a>
+                </div>
+            </div>
+        </div>
+        <div class="order-history col-md-8">
+            <a href="{% url 'order:order_list' %}" class="btn-order">See Your Order History</a>
+            <a href="{% url 'reservation:list' %}" class="btn-reservation">See Your Reservation History</a>
+        </div>
+    
+
+{% endblock %} 

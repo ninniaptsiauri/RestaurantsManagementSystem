@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %} Edit Your Profile {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'user/css/profile.css' %}">
+
+    <h1> Edit Your Profile </h1>
+
+    <form method="post" style="margin: auto; width: 50%;">
+        {{ user_form|crispy }}
+        {{ customer_form|crispy }}
+        
+        {% csrf_token %}
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="{% url 'user:customer_profile' user.customer.id %}" class="btn btn-secondary">Cancel</a>
+    </form>
+
+{% endblock %}

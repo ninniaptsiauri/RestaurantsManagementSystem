@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %} Restaurant Categories {% endblock %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% for restaurant_category in restaurant_categories %}
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ restaurant_category.name }}</h5>
+                            <a href="{% url 'main:restaurant_category' restaurant_category.pk %}" class="btn btn-primary">View Restaurants</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

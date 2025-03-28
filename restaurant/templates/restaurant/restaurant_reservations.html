@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1> Reservation History</h1>
+
+    {% if object_list %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Restaurant</th>
+                    <th>Table Number</th>
+                    <th>Reservation Date</th>
+                    <th>Reservation End</th>
+                    <th>Customer</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in object_list %}
+                    <tr>
+                        <td>{{ reservation.pk }}</td>
+                        <td>{{ reservation.restaurant.name }}</td>
+                        <td>{{ reservation.table.table_number }}</td>
+                        <td>{{ reservation.reservation_date }}</td>
+                        <td>{{ reservation.reservation_end_time }}</td>
+                        <td>{{ reservation.customer.user.first_name}} {{reservation.customer.user.last_name}}</td>
+                        <td>
+                            {% if reservation.is_cancelled %}
+                                <td>Cancelled</td>
+                            {% else %}
+                                <td>Confirmed</td>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+      
+        </table>
+    {% else %}
+        <p>No Orders found for your account.</p>
+    {% endif %}
+
+    {%include 'home/paginator.html' %}
+
+{% endblock %}

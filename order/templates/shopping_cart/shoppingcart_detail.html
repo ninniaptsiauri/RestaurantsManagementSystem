@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %} Shopping Cart {% endblock %}
+
+{% load static%}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'restaurant/css/table.css' %}">
+<div class="container">
+    <h2>Shopping Cart for {{ object.restaurant.name }}</h2>
+
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in object.items.all %}
+                    <tr>
+                        <td>{{ item.menu_item.name }}</td>
+                        <td>{{ item.menu_item.price }}</td>
+                        <td>{{ item.quantity }}</td>
+                        <td>{{ item.get_item_price }}</td>
+
+                        <td>
+                    
+                            <form action="{% url 'order:delete_shopping_cart_item' pk=item.pk %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn-order">Remove</button>
+                            </form>
+
+                            
+                            <a href="{% url 'order:update_shopping_cart_item' cart_pk=object.pk pk=item.pk %}" class="btn-reservation">Update Quantity</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Total Price: {{ total_price }}</h3>
+            <a href="{% url 'order:checkout' cart_pk=object.pk %}" class="btn-reservation">Checkout</a>
+            <button  class="btn-order" onclick="history.back()"> Cancel </button>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

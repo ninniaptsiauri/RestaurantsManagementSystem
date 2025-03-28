@@ -1,0 +1,130 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.profile-container {
+    display: flex;
+    gap: 20px;
+}
+
+
+
+.restaurant-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.restaurant-button {
+    background: transparent;
+    border: rgb(244, 241, 241);
+    padding: 10px 12px;
+    border-radius: 4px;
+    transition: 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-block;
+
+}
+
+.restaurant-button:hover {
+    background: #655b6982;
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+.restaurant-actions {
+    display: flex;
+    margin-top: 40px;
+    gap: 10px;
+    
+}
+
+
+
+.btn-secondary{
+    background: rgba(0, 0, 0, 0.586);
+}
+
+.btn-primary{
+    background: rgb(255, 255, 255);
+    color: black;
+    border: black;
+}
+
+.btn-primary:hover{
+    background: black;
+    color: white;
+}
+
+.btn-secondary:hover{
+    background: white;
+    color: black;
+}
+
+
+.order-reservation-btns {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 10px;
+    margin-top: 50px; 
+}
+
+
+.btn-order{
+    background: rgba(77, 94, 77, 0.727);
+    border: rgba(47, 58, 47, 0.727);
+    padding: 10px 12px;
+    border-radius: 4px;
+    transition: 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+
+.btn-reservation{
+    background: rgba(218, 163, 172, 0.758);
+    border: rgba(47, 58, 47, 0.727);
+    padding: 10px 12px;
+    border-radius: 4px;
+    transition: 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.order-history {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    
+}

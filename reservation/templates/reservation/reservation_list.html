@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static%}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'restaurant/css/table.css' %}">
+    <h1>Your Reservation History</h1>
+
+    {% if reservations %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Restaurant</th>
+                    <th>Number Of People</th>
+                    <th>Reservation Start Date</th>
+                    <th>Reservation End Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reservation in reservations %} 
+                    <tr>
+                        <td>{{ reservation.restaurant.name }}</td>
+                        <td>{{ reservation.table.capacity }}</td>
+                        <td>{{ reservation.reservation_date }}</td>
+                        <td>{{ reservation.reservation_end_time }}</td>
+                        <td>
+                            <a href="{% url 'reservation:detail' reservation.pk %}" class="btn-reservation">View Details</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No reservations found for your account.</p>
+    {% endif %}
+
+    {% include 'home/paginator.html' %}
+    
+{% endblock %}

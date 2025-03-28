@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static%}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'restaurant/css/table.css' %}">
+    <div class="container" >
+        <h1>Checkout</h1>
+        <p>Please enter your delivery address:</p>
+        <p>Restaurant: {{ cart.restaurant.name }}</p>
+        <p>Total Price: {{ cart.get_total_price }}</p>
+
+        <form method="post" style="width: 50%;">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-order">Confirm Checkout</button>
+        </form>
+        <a href="{% url 'order:shopping_cart_list'  %}" class="btn-reservation">Cancel</a>
+    </div>
+{% endblock %}
+
+

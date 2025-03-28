@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %} Restaurant {% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+  <link rel="stylesheet" href="{% static 'restaurant/css/table.css' %}">  
+  <div class="container" style="margin: auto;">
+
+    <div class="card restaurant-card" style="width: 30rem;" >
+      {% if menu_item.image %}
+        <img src="{{ menu_item.image.url }}" class="card-img-top menuitem-image" alt="{{ menu_item.name }}" >
+      {% else %}
+          <img src="" class="card-img-top menuitem-image" alt="{{ menu_item.name }}">
+      {% endif %}
+        
+        <div class="card-body">
+            <h4 class="card-title">{{menu_item.name}}</h4>
+            <h6 class="card-title"><b>Category: </b>{{menu_item.category}}</h6>
+            <h6 class="card-title"><b>Price: </b>₾{{menu_item.price}}</h6>
+            <p class="card-text"><b>Description: </b>{{menu_item.description}}</p>
+            
+            <form action="{% url 'order:add_to_cart' item_id=menu_item.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn-order">Add To ShoppingCart</button>
+          </form>
+        </div>
+    </div>
+
+    <button  class="btn btn-secondary" onclick="history.back()"> Go Back </button>
+
+    {% if perms.restaurant.change_menuitem %}
+      <a href="{% url 'restaurant:update_menu_item' menu_item.pk %}" class="btn-order">Edit</a>
+    {% endif%}
+
+    {% if perms.restaurant.delete_menuitem %}
+      <a href="{% url 'restaurant:delete_menu_item' menu_item.pk %}" class="btn-reservation">Delete</a>
+    {% endif%}
+
+  </div>
+
+{% endblock %}

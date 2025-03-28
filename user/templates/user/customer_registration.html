@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Customer Registration {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% load static%}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'user/css/profile.css' %}">
+
+    <h1>Customer Registration</h1>
+
+    <form method="post" style="margin: auto; width: 50%;">
+        {{ form|crispy }}
+        {{ address_form|crispy }}
+        
+        {% csrf_token %}
+
+        <button type="submit" class="btn btn-primary">Register</button>
+        <a href="{% url 'main:home' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+
+{% endblock %}

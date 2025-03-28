@@ -1,0 +1,34 @@
+<div class="row">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Restaurant Name</th>
+                <th>Number of People</th>
+                <th>Reservation Starts At:</th>
+                <th>Reservation Ends At:</th>
+                <th>Special Instructions: </th>
+                <th>Status: </th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>{{ reservation.restaurant.name }}</td>
+                    <td>{{ reservation.table.capacity }}</td>
+                    <td>{{ reservation.reservation_date }}</td>
+                    <td>{{ reservation.reservation_end_time }}</td>
+                    <td>{{ reservation.special_requests }}</td>
+                    {% if reservation.is_cancelled %}
+                        <td>Cancelled</td>
+                    {% elif reservation.is_future %}
+                        <td> Confirmed</td>
+                    {% else %}
+                        <td>Done</td>
+                    {% endif %}
+
+                    </td>
+                </tr>
+
+        
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %} Profile {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <link rel="stylesheet" href="{% static 'user/css/profile.css' %}">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png" class="card-img-top" alt="User profile image">
+                <div class="card-body">
+                    <h5 class="card-title">{{ user.username }} </h5>
+                    <p class="card-text">First Name: {{ user.first_name }}</p>
+                    <p class="card-text">Last Name: {{ user.last_name }}</p>
+                    <p class="card-text">Email: {{ user.email }}</p>
+                    <p class="card-text">Phone: {{ user.phone_number }}</p>
+                    <p class="card-text">Restaurant Name: {{ object.restaurant_name }}</p>
+                    <p class="card-text">Address: {{ object.restaurant_address }}</p>
+                    <p class="card-text">Description: {{ object.description }}</p>
+                    <a href="{% url 'user:restaurantowner_edit_profile' object.id%}" class="btn btn-secondary">Edit Profile</a>
+                    <a href="{% url 'user:change_password'%}" class="btn btn-secondary">Change Password</a>
+                    <a href="{% url 'user:delete_account' user.id  %}" class="btn btn-primary" style="margin-top: 5px;" >Delete Account</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <h2>Your Restaurants</h2>
+            {% if restaurants %}
+                <ul>
+                    {% for restaurant in restaurants %}
+                        <li>
+                            <a href="{% url 'restaurant:restaurant_details' restaurant.pk %}" class="restaurant-button">{{ restaurant.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>You don't have any restaurants yet.</p>
+            {% endif %}
+            <div class="restaurant-actions">
+                <a href="{% url 'restaurant:add'%}" class="btn btn-primary">Add Restaurant</a>
+                <a href="{% url 'restaurant:add_menu_category'%}" class="btn btn-secondary">Add Menu Category</a>
+                
+            </div>
+            <div class="order-reservation-btns">
+                <a href="{% url 'restaurant:restaurant_orders' %}" class="btn-order">See Orders For Your Restaurants</a>
+                <a href="{% url 'restaurant:restaurant_reservations' %}" class="btn-reservation">See Reservations For Your Restaurants</a>
+            </div>
+
+
+
+
+    
+
+{% endblock %} 

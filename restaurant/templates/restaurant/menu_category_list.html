@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} Restaurant Categories {% endblock %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'restaurant/css/table.css' %}">  
+    <div class="container">
+        <div class="row">
+            {% for menu_category in menu_categories %}
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ menu_category.name }}</h5>
+                            <a href="{% url 'restaurant:menu_items' menu_category.id%}" class="btn btn-order">View Full Menu</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

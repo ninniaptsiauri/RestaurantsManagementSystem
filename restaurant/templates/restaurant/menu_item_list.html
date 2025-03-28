@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %} Restaurant Categories {% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'restaurant/css/table.css' %}">
+
+    <div class="container">
+        {% if user.is_authenticated and perms.restaurant.add_menuitem %}
+            <a class="btn btn-secondary" style="margin-top: 10px;" href="{% url 'restaurant:add_menu_item' menu_category_id=menu_category.pk %}">Add New Item</a> 
+            <a class="btn btn-order" style="margin-top: 10px;" href="{% url 'restaurant:update_menu_category' pk=menu_category.pk %}">Update Category</a> 
+            <a class="btn btn-delete" style="margin-top: 10px;" href="{% url 'restaurant:delete_menu_category' pk=menu_category.pk %}">Delete Category</a>
+        {% endif %}
+        <div class="row">
+            {% for menu_item in menu_items %}
+                <div class="col-md-4 mb-3" style="margin-top: 10px;">
+                    <div class="card">
+                        {% if menu_item.image %}
+                            <img src="{{ menu_item.image.url }}" class="card-img-top menuitem-image" alt="{{ menu_item.name }}" >
+                        {% else %}
+                            <img src="https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/ifzpyktr/af3fa8ba-50bc-4321-8e4a-9ebf8b3ef11f.jpg" class="card-img-top menuitem-image" alt="{{ menu_item.name }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ menu_item.name }}</h5>
+                            <h5 class="card-title">₾{{ menu_item.price }}</h5>
+                            <a href="{% url 'restaurant:menu_item_details' menu_item.pk%}" class="btn-order">See More Details</a>
+                            <form action="{% url 'order:add_to_cart' item_id=menu_item.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn-reservation">+ Add To Cart</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

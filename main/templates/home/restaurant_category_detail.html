@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Restaurant {% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+{% if restaurant.category == restaurant_category.pk %}
+
+    <div class="container restaurant-div" >
+
+        <link rel="stylesheet" href="{% static 'home/css/restaurant_list.css' %} " >
+
+                {% include 'home/restaurant.html' %}
+                
+    </div>
+
+{% endif %}
+
+{% endblock %}

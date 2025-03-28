@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'restaurant/css/table.css' %}">
+
+    <h1>Your Shopping Carts</h1>
+
+    {% if object_list %}
+        {% for cart in object_list %}
+        <div class="row" style="width: 70%; margin: auto">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Restaurant</th>
+                        <th>Total Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                    <tr>
+                        <td>{{ cart.restaurant.name }}</td>
+                        <td>{{ cart.get_total_price }}</td>
+                        <td class="text-center" style="width: 380px;">
+                            <a href="{% url 'order:delete_shopping_cart' pk=cart.pk %}" class="btn-order">Delete Cart</a>
+                            <a href="{% url 'order:detail_shopping_cart' pk=cart.pk %}" class="btn-reservation">View Cart</a>
+                            <a href="{% url 'order:checkout' cart_pk=cart.pk %}" class="btn-cancel">Checkout</a>
+                        </td>
+        {% endfor%}              
+    
+    {% else %}
+        <p>No carts found for your account.</p>
+    {% endif %}
+{% endblock %}

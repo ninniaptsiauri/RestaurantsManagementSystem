@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'restaurant/css/table.css' %}">
+    <h1>Your Order History</h1>
+
+    {% if object_list %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Restaurant</th>
+                    <th>Total Price</th>
+                    <th>Order Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in object_list %}
+                    <tr>
+                        <td>{{ order.pk }}</td>
+                        <td>{{ order.restaurant.name }}</td>
+                        <td>{{ order.total_price }}</td>
+                        <td>{{ order.order_date }}</td>
+                        <td>
+                            <a href="{% url 'order:order_confirm' pk=order.pk %}" class="btn-order">See Details</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No Orders found for your account.</p>
+    {% endif %}
+    <button  class="btn-reservation" onclick="history.back()"> Go Back </button>
+
+    {% include 'home/paginator.html' %}
+{% endblock %}

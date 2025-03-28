@@ -1,0 +1,50 @@
+.create-restaurant-form-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.create-restaurant-div{
+    width: 50%;
+    margin-top: 20px;
+}
+
+.create-restaurant-div .add-btn {
+    display: inline-block;
+    background-color: #00000023;
+    color: rgb(225, 225, 225);
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid rgb(238, 232, 236);
+    font-size: 0.9rem;
+    margin-top: 10px;
+
+}
+
+.create-restaurant-div .add-btn:hover {
+    background-color: rgba(82, 39, 82, 0.722); 
+    color: white; 
+}
+
+.create-restaurant-div .cancel-btn{
+    display: inline-block;
+    background-color: #00000023;
+    color: rgb(225, 225, 225);
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 1px solid rgb(241, 235, 235);
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+.create-restaurant-div .cancel-btn:hover {
+    background-color: rgb(98, 98, 98); 
+    color: white; 
+}
+
+

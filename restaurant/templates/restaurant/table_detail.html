@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Table Details{% endblock %}
+
+{%load static%}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'restaurant/css/table.css' %}">
+    <div class="container">
+        <h1>Table Details</h1>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Table Number: {{ table.table_number }}</h5>
+                <p class="card-text">Capacity: {{ table.capacity }}</p>
+                <p class="card-text">Location: {{ table.location }}</p>
+                <p class="card-text">Restaurant: {{ restaurant.name }}</p>
+                <p class="card-text">Restaurant Address: {{ restaurant.address }}</p>
+            </div>
+            {% if perms.restaurant.change_table %}
+                <a class="btn-order" style="width: fit-content;" href="{% url 'restaurant:update_table' table.pk %}">Edit</a>
+                <a class="btn-cancel" style="width: fit-content;" href="{% url 'restaurant:delete_table' table.pk %}">Delete</a>
+            {% endif %}
+           
+        </div>
+        <a href="{% url 'reservation:create' restaurant.pk table.pk %}" class="btn-reservation">Make Reservation</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %} Restaurant {% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container restaurant-div" >
+
+    <link rel="stylesheet" href="{% static 'home/css/restaurant_list.css' %} " >
+
+    <div class="row"> 
+            {% include 'home/restaurant.html' %}
+
+            {% include 'home/paginator.html' %}
+    </div>
+            
+</div>
+
+{% endblock %}

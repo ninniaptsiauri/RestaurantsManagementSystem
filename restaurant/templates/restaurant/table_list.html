@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %} Table List {% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'restaurant/css/table.css' %}">
+
+    <div class="container">
+        <div class="row">
+            {% for table in tables %}
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Table Number: {{ table.table_number }}</h5>
+                            <p class="card-text">Capacity: {{ table.capacity }}</p>
+                            <a href="{% url 'restaurant:table_details' table.pk %}" class="btn-order">See Details</a>
+                            <a href="{% url 'reservation:create' restaurant.pk table.pk %}" class="btn-reservation">Make Reservation</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if perms.restaurant.add_table %}
+            <a href="{% url 'restaurant:create_table' restaurant.pk %}" class="btn-cancel">Add Table</a>
+        {% endif %}
+    </div>
+{% endblock %}

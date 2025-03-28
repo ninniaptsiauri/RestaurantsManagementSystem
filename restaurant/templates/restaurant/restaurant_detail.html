@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ restaurant.name }} {% endblock %}
+
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'restaurant/css/restaurant_detail.css' %}">
+    <div class="container restaurant-detail-container">
+        <div class="menu-categories-section">
+            <h3>Menu Categories</h3>
+            {% if menu_categories %}
+                <div class="menu-categories-list">
+                    {% for menu_category in menu_categories %}
+                        <a href="{% url 'restaurant:menu_items' menu_category.pk %}" class="menu-category-button">{{ menu_category.name }}</a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No menu categories found for this restaurant.</p>
+            {% endif %}
+        </div>
+        {% if perms.restaurant.add_menucategory %}
+                <a href="{% url 'restaurant:add_menu_category' %}" class="btn btn-secondary">Add Menu Category</a>
+            {% endif %}
+        <div class="restaurant-header">
+            <div class="restaurant-image-container">
+                {% if restaurant.image %}
+                    <img src="{{ restaurant.image.url }}" class="restaurant-image" alt="{{ restaurant.name }}">
+                {% else %}
+                    <img src="https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/ifzpyktr/af3fa8ba-50bc-4321-8e4a-9ebf8b3ef11f.jpg" class="restaurant-image" alt="{{ restaurant.name }}">
+                {% endif %}
+            </div>
+            <div class="restaurant-info">
+                <h2 class="restaurant-name">{{ restaurant.name }}</h2>
+                <p class="restaurant-address"><b>Location:</b> {{ restaurant.address }}</p>
+                <p class="restaurant-category"><b>Category:</b> {{ restaurant.category.name }}</p>
+                <p class="restaurant-hours"><b>Open:</b> {{ restaurant.opening_hour }} - {{ restaurant.closing_hour }}</p>
+                <p class="restaurant-phone"><b>Contact:</b> {{ restaurant.phone_number }}</p>
+                <p class="restaurant-description">{{ restaurant.description }}</p>
+                <div class="tables-section">
+                    <h3>Tables</h3>
+                    {% if has_tables %}
+                        <a href="{% url 'restaurant:table_list' restaurant.pk %}" class="btn btn-primary">View Tables / Make Reservations</a>
+                    {% else %}
+                        <p>Table reservation isn't available for this restaurant.</p>
+                    {% endif %}
+                    {% if perms.restaurant.add_table %}
+                        <a href="{% url 'restaurant:create_table' restaurant.pk %}" class="menu-category-button">Add Table</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="restaurant-actions">
+            <a href="{% url 'main:home' %}" class="btn btn-secondary">Go Back</a>
+            {% if perms.restaurant.change_restaurant %}
+                <a href="{% url 'restaurant:update_restaurant' restaurant.pk %}" class="btn btn-warning">Edit</a>
+            {% endif %}
+            {% if perms.restaurant.delete_restaurant %}
+                <a href="{% url 'restaurant:delete_restaurant' restaurant.pk %}" class="btn btn-danger">Delete</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

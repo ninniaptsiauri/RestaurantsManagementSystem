@@ -1,0 +1,60 @@
+{% load static%}
+<nav class="navbar navbar-expand-lg bg-dark">
+
+    <div class="container-fluid">
+      <link rel="stylesheet" href="{% static 'navbar/css/navbar.css' %}">
+      <a class="navbar-brand" href="#">Menu</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'main:home'%}">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+            </a>
+            <ul class="dropdown-menu">
+                {% for category in restaurant_categories %}
+                <li><a class="dropdown-item" href="{% url 'main:restaurant_category' category.pk %}">{{ category.name}}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+
+          {% if user.is_authenticated %}
+            {% if user.customer %}
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'user:customer_profile' user.customer.id %}">{{ user }}</a>
+              </li>
+            {% elif user.role == 'restaurant_owner' %}
+              <li class="nav-item">
+                <a class="nav-link " href="{% url 'user:restaurantowner_profile' user.restaurantowner.id %}">{{ user.username }}</a>
+              </li>
+            {% endif %}
+            <li class="nav-item">
+              <form method="post" action="{% url 'user:logout' %}">
+                {% csrf_token %}
+                <button class="nav-link" type="submit">Logout</button>
+              </form>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link " href="{% url 'user:login' %}">Login</a>
+            </li>
+          {% endif %}
+          {% if user.is_authenticated and user.customer %}
+            <a href="{% url 'order:shopping_cart_list' %}" class="cart-icon-container">
+                <img class="cart-icon" style="width: 30px; height: 30px;" src="https://cdn-icons-png.flaticon.com/512/1170/1170678.png" alt="Cart">
+            </a>
+          {% endif %}
+  
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search Food or Restaurant" aria-label="Search" name="query">
+          <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %} Your Reservations History{% endblock %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <link rel="stylesheet" href="{% static 'restaurant/css/table.css' %}">
+
+    <div class="row">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Restaurant Name</th>
+                    <th>Number of People</th>
+                    <th>Reservation Starts At:</th>
+                    <th>Reservation Ends At:</th>
+                    <th>Special Instructions: </th>
+                    <th>Status: </th>
+                    <th>Actions: </th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>{{ reservation.restaurant.name }}</td>
+                        <td>{{ reservation.table.capacity }}</td>
+                        <td>{{ reservation.reservation_date }}</td>
+                        <td>{{ reservation.reservation_end_time }}</td>
+                        <td>{{ reservation.special_requests }}</td>
+                        {% if reservation.is_cancelled %}
+                            <td>Cancelled</td>
+                        {% elif reservation.is_future %}
+                            <td> Confirmed</td>
+                        {% else %}
+                            <td>Done</td>
+                        {% endif %}
+
+                        <td>
+                            {% if reservation.is_cancelled %}
+                                <a href="{% url 'reservation:delete' reservation.pk %}" class="btn-delete">Delete</a>
+
+                            {% elif reservation.is_future %}
+                                <form action="{% url 'reservation:cancel' reservation.pk %}" method="post" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn-cancel">Cancel</button>
+                                    <a href="{% url 'reservation:update' reservation.pk %}" class="btn-delete">Update</a>
+                                </form>
+                            {% endif %}
+                        </td>
+                        </td>
+                    </tr>
+
+            
+            </tbody>
+        </table>
+    </div>
+    <button  class="btn-order" onclick="history.back()"> Go Back </button>
+
+
+
+{% endblock %}
