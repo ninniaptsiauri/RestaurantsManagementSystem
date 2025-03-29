@@ -16,7 +16,7 @@
                 <p class="card-text">Restaurant: {{ restaurant.name }}</p>
                 <p class="card-text">Restaurant Address: {{ restaurant.address }}</p>
             </div>
-            {% if perms.restaurant.change_table %}
+            {% if user.is_authenticated and restaurant.restaurant_owner == request.user %}
                 <a class="btn-order" style="width: fit-content;" href="{% url 'restaurant:update_table' table.pk %}">Edit</a>
                 <a class="btn-cancel" style="width: fit-content;" href="{% url 'restaurant:delete_table' table.pk %}">Delete</a>
             {% endif %}

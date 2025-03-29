@@ -24,7 +24,7 @@
                 </div>
             {% endfor %}
         </div>
-        {% if perms.restaurant.add_table %}
+        {% if user.is_authenticated and restaurant.restaurant_owner == request.user %}
             <a href="{% url 'restaurant:create_table' restaurant.pk %}" class="btn-cancel">Add Table</a>
         {% endif %}
     </div>

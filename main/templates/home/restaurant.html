@@ -1,10 +1,10 @@
 
 {% for restaurant in restaurants %}
 
-    <div class="card restaurant-card" style="width: 18rem;" >
+    <div class="card restaurant-card" style="width: 16rem; margin-top: 10px;" >
 
         {% if restaurant.image %}
-        <img src="{{ image.url }}" class="card-img-top restaurant-image" alt="" >
+        <img src="{{ restaurant.image.url }}" class="card-img-top restaurant-image" alt="" >
     {% else %}
         <img src="https://popmenucloud.com/cdn-cgi/image/width%3D1200%2Cheight%3D1200%2Cfit%3Dscale-down%2Cformat%3Dauto%2Cquality%3D60/ifzpyktr/af3fa8ba-50bc-4321-8e4a-9ebf8b3ef11f.jpg" class="card-img-top restaurant-image" alt="" >
     {% endif %}
@@ -21,6 +21,7 @@
             <a href="{% url 'restaurant:restaurant_details' restaurant.pk %}" class="see-more-button">See More</a>
         </div>
     </div>
- 
+
+    
 {% endfor %}
 

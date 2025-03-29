@@ -19,7 +19,7 @@
                 <p>No menu categories found for this restaurant.</p>
             {% endif %}
         </div>
-        {% if perms.restaurant.add_menucategory %}
+        {% if perms.restaurant.add_menucategory and request.user == restaurant.restaurant_owner %}
                 <a href="{% url 'restaurant:add_menu_category' %}" class="btn btn-secondary">Add Menu Category</a>
             {% endif %}
         <div class="restaurant-header">
@@ -44,7 +44,7 @@
                     {% else %}
                         <p>Table reservation isn't available for this restaurant.</p>
                     {% endif %}
-                    {% if perms.restaurant.add_table %}
+                    {% if perms.restaurant.add_table and request.user == restaurant.restaurant_owner %}
                         <a href="{% url 'restaurant:create_table' restaurant.pk %}" class="menu-category-button">Add Table</a>
                     {% endif %}
                 </div>
@@ -52,10 +52,8 @@
         </div>
         <div class="restaurant-actions">
             <a href="{% url 'main:home' %}" class="btn btn-secondary">Go Back</a>
-            {% if perms.restaurant.change_restaurant %}
+            {% if user.is_authenticated and request.user == restaurant.restaurant_owner %}
                 <a href="{% url 'restaurant:update_restaurant' restaurant.pk %}" class="btn btn-warning">Edit</a>
-            {% endif %}
-            {% if perms.restaurant.delete_restaurant %}
                 <a href="{% url 'restaurant:delete_restaurant' restaurant.pk %}" class="btn btn-danger">Delete</a>
             {% endif %}
         </div>

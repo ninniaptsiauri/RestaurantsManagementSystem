@@ -1,7 +1,7 @@
-from typing import Any
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import User, Customer, RestaurantOwner
+from django.contrib.auth.models import Group
 
 class CustomerRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -10,7 +10,14 @@ class CustomerRegistrationForm(UserCreationForm):
         model = User
         fields = ['first_name', 'last_name', 'username',  'email', 'phone_number']
 
-
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if commit:
+            user.save()
+            customer_group = Group.objects.get(name='customer')
+            user.groups.add(customer_group)
+        return user
+    
 
 class CustomerAddressAddForm(forms.ModelForm):
     class Meta:
@@ -27,7 +34,15 @@ class RestaurantOwnerRegistrationForm(UserCreationForm):
         model = User
         fields = ['first_name', 'last_name', 'username', 'phone_number', 'email', ]
 
-
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        if commit:
+            user.save()
+            restaurant_owner_group = Group.objects.get(name='restaurant_owner')
+            user.groups.add(restaurant_owner_group)
+        return user
+    
+    
 
 class RestaurantOwnerInfoForm(forms.ModelForm):
     class Meta:

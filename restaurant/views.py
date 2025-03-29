@@ -452,7 +452,7 @@ class CreateTableView(PermissionRequiredMixin, CreateView):
             
 
         else:
-            logger.info(f'Table "{form.cleaned_data["name"]}" created successfully by user [{self.request.user.username}]')
+            logger.info(f'Table created successfully by user [{self.request.user.username}]')
             return super().form_valid(form)
         
 

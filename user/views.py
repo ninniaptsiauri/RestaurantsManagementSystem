@@ -90,7 +90,7 @@ class RestaurantOwnerRegistrationView(CreateView):
 
     def form_valid(self, form):
         try:
-            user = form.save(commit=False)
+            user = form.save()
             user.role = 'restaurant_owner'
             user.save()
             

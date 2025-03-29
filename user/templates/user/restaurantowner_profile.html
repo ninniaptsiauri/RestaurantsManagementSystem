@@ -20,7 +20,6 @@
                     <p class="card-text">Last Name: {{ user.last_name }}</p>
                     <p class="card-text">Email: {{ user.email }}</p>
                     <p class="card-text">Phone: {{ user.phone_number }}</p>
-                    <p class="card-text">Restaurant Name: {{ object.restaurant_name }}</p>
                     <p class="card-text">Address: {{ object.restaurant_address }}</p>
                     <p class="card-text">Description: {{ object.description }}</p>
                     <a href="{% url 'user:restaurantowner_edit_profile' object.id%}" class="btn btn-secondary">Edit Profile</a>

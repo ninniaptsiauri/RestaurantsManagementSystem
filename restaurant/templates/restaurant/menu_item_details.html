@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{% static 'restaurant/css/table.css' %}">  
   <div class="container" style="margin: auto;">
 
-    <div class="card restaurant-card" style="width: 30rem;" >
+    <div class="card restaurant-card" style="width: 25rem;" >
       {% if menu_item.image %}
         <img src="{{ menu_item.image.url }}" class="card-img-top menuitem-image" alt="{{ menu_item.name }}" >
       {% else %}
@@ -31,11 +31,8 @@
 
     <button  class="btn btn-secondary" onclick="history.back()"> Go Back </button>
 
-    {% if perms.restaurant.change_menuitem %}
+    {% if user.is_authenticated and menu_item.category.restaurant.restaurant_owner == request.user %} 
       <a href="{% url 'restaurant:update_menu_item' menu_item.pk %}" class="btn-order">Edit</a>
-    {% endif%}
-
-    {% if perms.restaurant.delete_menuitem %}
       <a href="{% url 'restaurant:delete_menu_item' menu_item.pk %}" class="btn-reservation">Delete</a>
     {% endif%}
 
