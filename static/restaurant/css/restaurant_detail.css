@@ -75,7 +75,7 @@ body {
 .btn-secondary { background: #555; }
 .btn-warning { background: rgb(116, 80, 116) }
 .btn-danger { background: #121111d3; }
-.btn-primary { background: rgb(148, 103, 148) }
+.btn-primary { background: rgba(148, 103, 148, 0.743) }
 
 .btn:hover {
     background: rgb(155, 142, 142);
@@ -109,7 +109,7 @@ body {
 }
 
 .menu-category-button {
-    background: #c5b4b4a3;
+    background: rgba(74, 102, 74, 0.594);
     padding: 12px 15px;
     border-radius: 8px;
     transition: 0.3s;

@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="{% static 'home/css/restaurant_list.css' %} " >
 
-    <div class="row"> 
+    <div class="row d-flex {% if restaurants|length >= 3 %}justify-content-center{% else %}justify-content-start{% endif %} "> 
             {% include 'home/restaurant.html' %}
 
             {% include 'home/paginator.html' %}

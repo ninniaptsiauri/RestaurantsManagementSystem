@@ -43,7 +43,7 @@
     border: none;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background: linear-gradient(to bottom, #f8f8f828, #e8e8e8a1); 
+    background: linear-gradient(to bottom, #f8f8f888, #e8e8e8c0); 
     width: 400px;
     margin: 20px;
     color: #333; 
@@ -101,7 +101,7 @@
 .signup-div .create-customer-btn{
     display: inline-block;
     background-color: #00000023;
-    color: rgba(114, 51, 125, 0.633);
+    color: rgba(114, 51, 125, 0.827);
     padding: 8px 16px;
     text-decoration: none;
     font-weight: bold;
@@ -120,7 +120,7 @@
 .signup-div .create-business-btn{
     display: inline-block;
     background-color: #00000023;
-    color: rgba(85, 80, 80, 0.781);
+    color: rgba(85, 80, 80, 0.972);
     padding: 8px 16px;
     text-decoration: none;
     font-weight: bold;

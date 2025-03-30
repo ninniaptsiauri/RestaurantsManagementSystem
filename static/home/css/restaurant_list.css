@@ -22,11 +22,12 @@
     transition: background-color 0.3s ease, color 0.3s ease; 
     border: 1px solid rgb(248, 238, 238); 
     font-size: 0.9rem;
-    margin-top: 10px;
-}
+    
+ }
 
 .see-more-button:hover {
     background-color: black; 
     color: white; 
 }
+
 

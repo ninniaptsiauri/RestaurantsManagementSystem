@@ -77,7 +77,7 @@ class CreateReservation(PermissionRequiredMixin, CreateView):
                 logger.error(f"Error sending reservation confirmation email for reservation ID: {reservation.pk}: {e}")
                 messages.warning(self.request, "Reservation created, but there was a problem sending the confirmation email.")
              
-            logger.info(f'Reservation created successfully for user: [{self.request.user}] for table ({form.cleaned_data["table"]})')
+            logger.info(f'Reservation created successfully for user: [{self.request.user}] for table (ID: {form.cleaned_data["table"]})')
             return super().form_valid(form)
     
        

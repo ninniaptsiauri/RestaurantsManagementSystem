@@ -16,7 +16,7 @@
         {% endif %}
         <div class="row">
             {% for menu_item in menu_items %}
-                <div class="col-md-4 mb-3" style="margin-top: 10px; width: 350px;">
+                <div class="col-md-4 mb-3" style="margin-top: 10px;">
                     <div class="card">
                         {% if menu_item.image %}
                             <img src="{{ menu_item.image.url }}" class="card-img-top menuitem-image" alt="{{ menu_item.name }}" >

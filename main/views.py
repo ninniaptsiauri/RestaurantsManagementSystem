@@ -24,8 +24,7 @@ class RestaurantListView(ListView):
         if query:
             logger.info(f'Search Filter: "{query}"')
             restaurants = Restaurant.objects.filter(
-                Q(name__icontains=query) | Q(menu_categories__name__icontains=query)
-            )
+                Q(name__icontains=query) | Q(menu_categories__name__icontains=query)).distinct()
         else:
             logger.info('Accessing restaurant list page')
             restaurants = Restaurant.objects.all().order_by('-add_time')
