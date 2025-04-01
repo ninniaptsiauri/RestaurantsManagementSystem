@@ -26,6 +26,7 @@ class ShoppingCart(models.Model):
         return total_price
     
 
+
 class ShoppingCartItem(models.Model):
     cart = models.ForeignKey(ShoppingCart, on_delete=models.CASCADE, related_name='items')
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
@@ -70,6 +71,7 @@ class Order(models.Model):
     def __str__(self):
         return f'Order {self.pk} by {self.customer.name}'
 
+    
     
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_items')

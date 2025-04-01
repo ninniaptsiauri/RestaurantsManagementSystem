@@ -75,6 +75,54 @@ class RestaurantDetailView(DetailView):
     
 
 
+
+
+class UpdateRestaurantView(PermissionRequiredMixin, UpdateView):
+    model = Restaurant
+    form_class = RestaurantForm
+    template_name = 'restaurant/update_restaurant.html'
+    permission_required = 'restaurant.change_restaurant'
+
+    def form_valid(self, form):
+        try:
+            restaurant = form.save()
+
+        except Exception as e:
+            return handle_error(self.request, e, 'updating Restaurant')
+        
+        else:
+            logger.info(f'Restaurant "{self.object.name}" updated successfully.')
+            return super().form_valid(form)
+    
+    
+    def form_invalid(self, form):
+        logger.info(f'Restaurant {self.object.name} update  failed. Errors: {form.errors}')
+        return super().form_invalid(form)
+        
+    
+    
+    def get_success_url(self):
+        return reverse_lazy('restaurant:restaurant_details', kwargs={'pk': self.object.pk})
+
+
+
+
+class DeleteRestaurantView(PermissionRequiredMixin, DeleteView):
+    model = Restaurant
+    success_url = reverse_lazy('main:home')
+    template_name = 'restaurant/confirm_delete.html'
+    permission_required = 'restaurant.delete_restaurant'
+
+
+    def form_valid(self, form):
+        logger.info(f'Restaurant "{self.object.name}" deleted successfully.')
+        return super().form_valid(form)
+        
+
+
+    
+
+
 class RestaurantOrderView(LoginRequiredMixin, ListView):
     model = Order
     template_name = 'restaurant/restaurant_orders.html'
@@ -101,6 +149,7 @@ class RestaurantOrderView(LoginRequiredMixin, ListView):
         logger.info(f'User [{request.user.username}] accessed restaurant order list.')
         return super().get(request, *args, **kwargs)
     
+
 
 
 class RestaurantReservationView(LoginRequiredMixin, ListView):
@@ -133,46 +182,6 @@ class RestaurantReservationView(LoginRequiredMixin, ListView):
  
 
 
-class UpdateRestaurantView(PermissionRequiredMixin, UpdateView):
-    model = Restaurant
-    form_class = RestaurantForm
-    template_name = 'restaurant/update_restaurant.html'
-    permission_required = 'restaurant.change_restaurant'
-
-    def form_valid(self, form):
-        try:
-            restaurant = form.save()
-
-        except Exception as e:
-            return handle_error(self.request, e, 'updating Restaurant')
-        
-        else:
-            logger.info(f'Restaurant "{self.object.name}" updated successfully.')
-            return super().form_valid(form)
-    
-    
-    def form_invalid(self, form):
-        logger.info(f'Restaurant {self.object.name} update  failed. Errors: {form.errors}')
-        return super().form_invalid(form)
-        
-    
-    
-    def get_success_url(self):
-        return reverse_lazy('restaurant:restaurant_details', kwargs={'pk': self.object.pk})
-
-
-
-class DeleteRestaurantView(PermissionRequiredMixin, DeleteView):
-    model = Restaurant
-    success_url = reverse_lazy('main:home')
-    template_name = 'restaurant/confirm_delete.html'
-    permission_required = 'restaurant.delete_restaurant'
-
-
-    def form_valid(self, form):
-        logger.info(f'Restaurant "{self.object.name}" deleted successfully.')
-        return super().form_valid(form)
-        
 
 
 

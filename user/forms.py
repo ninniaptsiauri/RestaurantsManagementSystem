@@ -19,6 +19,7 @@ class CustomerRegistrationForm(UserCreationForm):
         return user
     
 
+
 class CustomerAddressAddForm(forms.ModelForm):
     class Meta:
         model = Customer
@@ -42,13 +43,7 @@ class RestaurantOwnerRegistrationForm(UserCreationForm):
             user.groups.add(restaurant_owner_group)
         return user
     
-    
 
-class RestaurantOwnerInfoForm(forms.ModelForm):
-    class Meta:
-        model = RestaurantOwner
-        fields = ['restaurant_name', 'restaurant_address', 'description']
-        
 
 
 
@@ -69,7 +64,3 @@ class CustomerUpdateForm(forms.ModelForm):
 
 
 
-class RestaurantOwnerUpdateForm(forms.ModelForm):
-    class Meta:
-        model = RestaurantOwner
-        fields = ['restaurant_name', 'restaurant_address', 'description']

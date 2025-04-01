@@ -28,7 +28,7 @@
               <li class="nav-item">
                 <a class="nav-link " href="{% url 'user:customer_profile' user.customer.id %}">{{ user }}</a>
               </li>
-            {% elif user.role == 'restaurant_owner' %}
+            {% elif user.restaurantowner %}
               <li class="nav-item">
                 <a class="nav-link " href="{% url 'user:restaurantowner_profile' user.restaurantowner.id %}">{{ user.username }}</a>
               </li>

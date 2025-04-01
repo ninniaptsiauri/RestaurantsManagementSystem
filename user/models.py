@@ -51,10 +51,8 @@ class Customer(models.Model):
 
 
 class RestaurantOwner(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    restaurant_name = models.CharField(max_length=150)
-    restaurant_address = models.CharField(max_length=200)
-    description = models.TextField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='restaurantowner')
+    
     
     class Meta:
         db_table = 'restaurant_owner'

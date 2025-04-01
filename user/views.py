@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from user.models import User, Customer, RestaurantOwner
 from restaurant.models import Restaurant, MenuCategory
-from .forms import CustomerRegistrationForm, RestaurantOwnerRegistrationForm, CustomerAddressAddForm, RestaurantOwnerInfoForm
-from .forms import UserUpdateForm, RestaurantOwnerUpdateForm, CustomerUpdateForm
+from .forms import CustomerRegistrationForm, RestaurantOwnerRegistrationForm, CustomerAddressAddForm
+from .forms import UserUpdateForm,  CustomerUpdateForm
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView
 from django.urls import reverse_lazy
@@ -80,28 +80,14 @@ class RestaurantOwnerRegistrationView(CreateView):
     success_url = reverse_lazy('user:login')
 
 
-    def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-        
-            context['restaurant_owner_form'] = RestaurantOwnerInfoForm()
-            
-            return context
-
 
     def form_valid(self, form):
         try:
             user = form.save()
             user.role = 'restaurant_owner'
             user.save()
+            restaurant_owner = RestaurantOwner.objects.create(user=user)
             
-            
-            restaurant_owner_form = RestaurantOwnerInfoForm(self.request.POST)
-            if restaurant_owner_form.is_valid():
-                restaurant_owner = RestaurantOwner.objects.create(user=user, 
-                            restaurant_name=restaurant_owner_form.cleaned_data['restaurant_name'],
-                            restaurant_address=restaurant_owner_form.cleaned_data['restaurant_address'],
-                            description=restaurant_owner_form.cleaned_data['description'],
-                            )
             
             logger.info(f'Registration of restaurant owner [{form.cleaned_data["username"]}] was successful.')
             return redirect(self.success_url)
@@ -262,14 +248,14 @@ class RestaurantOwnerProfileView(LoginRequiredMixin, DetailView):
 
 class UpdateRestaurantOwnerView(LoginRequiredMixin, UpdateView):
     model = RestaurantOwner
-    form_class = RestaurantOwnerUpdateForm
+    form_class = UserUpdateForm
     template_name = 'user/restaurantowner_update.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         restaurant_owner = self.get_object()
         context['user_form'] = UserUpdateForm(instance=restaurant_owner.user)
-        context['restaurant_owner_form'] = RestaurantOwnerInfoForm(instance=restaurant_owner)
+
         return context
 
 
@@ -278,7 +264,7 @@ class UpdateRestaurantOwnerView(LoginRequiredMixin, UpdateView):
 
 
     def form_valid(self, form):
-        result = validate_profile_update(self.request, self.object, UserUpdateForm, RestaurantOwnerUpdateForm, self.get_success_url())
+        result = validate_profile_update(self.request, self.object, UserUpdateForm, UserUpdateForm, self.get_success_url())
         if isinstance(result, dict):
             return self.form_invalid(form, result['user_form'], result['profile_form'])
         return result

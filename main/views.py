@@ -51,6 +51,7 @@ class RestaurantDetailView(DetailView):
     
 
 
+
 class RestaurantCategoryListView(ListView):
     model = RestaurantCategory
     template_name = 'home/restaurant_category_list.html'

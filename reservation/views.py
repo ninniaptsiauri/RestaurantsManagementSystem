@@ -133,8 +133,6 @@ class UpdateReservation(PermissionRequiredMixin, UpdateView):
           
                 
     
-    
-    
     def form_invalid(self, form):
         logger.error(f'Reservation update failed for user: [{self.request.user}]')
         return super().form_invalid(form)
