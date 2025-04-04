@@ -564,3 +564,26 @@ class DeleteTableView(PermissionRequiredMixin, DeleteView):
         )
     
 
+
+
+class AllMenuItemsView(ListView):
+    model = MenuItem
+    template_name = 'restaurant/all_menu_items.html'
+    context_object_name = 'menu_items'
+    paginate_by = 10
+    
+
+    def get_queryset(self):
+        restaurant_id = self.kwargs['restaurant_id']
+        restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
+        return MenuItem.objects.filter(category__restaurant=restaurant)
+    
+    
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        restaurant = get_object_or_404(Restaurant, pk=self.kwargs['restaurant_id'])
+        context['restaurant'] = restaurant
+        return context
+    
+

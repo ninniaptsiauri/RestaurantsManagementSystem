@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %} All menu items {% endblock %}
+
+{% load static %}
+
+{% block content %}
+    <h3>"{{ restaurant.name }}"" Menu</h3>
+
+    <link rel="stylesheet" href="{% static 'restaurant/css/table.css' %}">
+    <div class="row">
+        {% for menu_item in menu_items %}
+            <div class="col-md-4 mb-3" style="margin-top: 10px;">
+                <div class="card">
+                    {% if menu_item.image %}
+                        <img src="{{ menu_item.image.url }}" class="card-img-top menuitem-image" alt="{{ menu_item.name }}" >
+                    {% else %}
+                        <img src="" class="card-img-top menuitem-image" alt="{{ menu_item.name }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ menu_item.name }}</h5>
+                        <h5 class="card-title">₾{{ menu_item.price }}</h5>
+                            <a href="{% url 'restaurant:menu_item_details' menu_item.pk%}" class="btn-order">See More Details</a>
+                            <form action="{% url 'order:add_to_cart' item_id=menu_item.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn-reservation">+ Add To Cart</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% include 'home/paginator.html' %}
+{% endblock %}

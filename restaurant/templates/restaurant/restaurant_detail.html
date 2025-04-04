@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{% static 'restaurant/css/restaurant_detail.css' %}">
     <div class="container restaurant-detail-container">
         <div class="menu-categories-section">
-            <h3>Menu Categories</h3>
+            <h3>Menu Categories</h3> <a class="btn btn-secondary" href="{% url 'restaurant:all_menu_items' restaurant.pk %}">See Full Menu</a>
             {% if menu_categories %}
                 <div class="menu-categories-list">
                     {% for menu_category in menu_categories %}

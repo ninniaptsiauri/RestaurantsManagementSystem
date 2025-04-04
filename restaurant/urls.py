@@ -18,6 +18,7 @@ urlpatterns = [
     path('menuitem/details/<int:pk>/', views.MenuItemDetailsView.as_view(), name='menu_item_details'),
     path('menuitem/update/<int:pk>/', views.UpdateMenuItemView.as_view(), name='update_menu_item'),
     path('menuitem/delete/<int:pk>/', views.DeleteMenuItemView.as_view(), name='delete_menu_item'),
+    path('menuitems/all/<int:restaurant_id>/', views.AllMenuItemsView.as_view(), name='all_menu_items'),
     path('table/create/<int:restaurant_id>/', views.CreateTableView.as_view(), name='create_table'),
     path('table/list/<int:restaurant_id>/', views.TableListView.as_view(), name='table_list'),
     path('table/details/<int:pk>/', views.TableDetailView.as_view(), name='table_details'),
